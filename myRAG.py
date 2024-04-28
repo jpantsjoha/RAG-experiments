@@ -12,7 +12,7 @@ from pathlib import Path
 client = OpenAI(base_url="http://localhost:1234/v1")
 
 # Define the directories for loading and processing documents
-mydir = Path.home() / 'workspace' / 'RAG-experiements' / 'genTexts'
+mydir = Path.home() / 'workspace' / 'RAG-experiments' / 'genTexts'
 print("Loading directory", mydir)
 
 # Load and process documents
