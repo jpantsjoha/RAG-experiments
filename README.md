@@ -9,7 +9,9 @@ This repo will eventually grow a collection of my hands-on accelerators.
 Tag along and follow this journey on [Linkedin](https://www.linkedin.com/in/johas/) and [Medium Blog](https://jaroslav-pantsjoha.medium.com/)  
 
 ## Description
-This project implements a Retrieval-Augmented Generation (RAG) system that leverages the power of local Large Language Models (LLMs) to enhance the process of generating responses based on the retrieval of relevant documents. The system reads multiple text files from a specified directory, processes these files to retrieve contextually relevant information, and uses this information to generate enhanced responses to user queries.
+This project implements a Retrieval-Augmented Generation (RAG) system that leverages the power of local Large Language Models (LLMs) to enhance the process of generating responses based on the retrieval of relevant documents. The system reads multiple text files from a specified directory, processes these files to retrieve contextually relevant information, and uses this information to generate enhanced responses to user queries. Inspired by Ruddy Thor [Rag Demo](https://github.com/ruddythor/mick.ai)
+
+![RAG Demo Screenshot](RAG-demo-screenshot.png)
 
 ### Assumptions, Levels of Competence as my Playing Field
 - The Key emphasis for this experiment is to get this running quickly, and operating locally soon as - **Most Value for Least Effort**
@@ -24,6 +26,11 @@ This project implements a Retrieval-Augmented Generation (RAG) system that lever
 - **Dynamic Content Retrieval:** Integrates Chroma vector storage for efficient storage and retrieval of document embeddings.
 - **Interactive Query System:** Provides a live interface for users to enter queries and receive responses based on the retrieved documents.
 
+## RAG Architecture
+The system architecture is outlined in the diagram below. It showcases the flow from document loading and processing to response generation, facilitated by the interplay between various components.
+
+![RAG Architecture](rag_architecture.png)
+
 ## RAG Architecture Details
 The architecture consists of several key components:
 - **Directory Loader:** Loads all text files from a given directory.
@@ -33,16 +40,12 @@ The architecture consists of several key components:
 - **OpenAI LLM Client:** Interfaces with a local LLM endpoint to generate responses based on retrieved text.
 - **RAG Chain:** Orchestrates the flow from retrieval to response generation.
 
-## RAG Architecture
-The system architecture is outlined in the diagram below. It showcases the flow from document loading and processing to response generation, facilitated by the interplay between various components.
-
-![RAG Architecture](rag_architecture.png)
-
 ### How do you Get Started - Quick and Easy
 1. Clone the repository to your local machine.
 2. Ensure you have a local LLM endpoint running at `http://localhost:1234/v1`.
-3. Install the required Python libraries listed in `requirements.txt`.
-4. Run the main script to start the RAG process: `python rag_process.py`.
+3. Install the required Python libraries listed in **below**
+4. Put your PDF (Data Corpus/Reasearch) into **PDFs** folder and run `python convert-to-text.py` 
+5. Then, run the main script to start the RAG process: `python myRAG.py`.
 5. Enter prompts as required to retrieve and generate responses.
 
 ### Dependencies
@@ -81,7 +84,7 @@ brew install poppler pkg-config python graphviz
 The following Python packages are required. You can install them using pip:
 
 ```sh
-pip install open-interpreter bs4 langchain-community langchain-chroma langchain langchainhub gpt4all pdftotext langchain_openai unstructured pygraphviz
+pip install open-interpreter bs4 langchain-community langchain-chroma langchain langchainhub gpt4all pdftotext PyMuPDF langchain_openai unstructured pygraphviz
 ```
 
 To handle any potential issues with the pygraphviz installation related to library paths, you can also install it using the following commands:
