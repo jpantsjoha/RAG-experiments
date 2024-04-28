@@ -9,6 +9,8 @@
 
 - **Run RAG & Ask Questions**
 
+- Local LLM Tested with [Meta-Llama-3-8B-Instruct & yet **very solid performance from Phi-3-mini-128k-Instruct]**
+
 
 ## About
 This repo came about at the back of my recent all-things GenerativeAI hands-on explorations followed by the cross-training into Machine Learning for a deeper understanding on this subject matter.
