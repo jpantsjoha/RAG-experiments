@@ -1,0 +1,51 @@
+digraph RAGArchitecture {
+  // Graph style attributes
+  graph [fontsize=10 fontname="Verdana" compound=true]
+  node [shape=box fontsize=10 fontname="Verdana"]
+  edge [fontsize=10 fontname="Verdana"]
+
+  // Define the subgraph for loading and processing documents
+  subgraph cluster_loader {
+    label="Document Loading and Processing";
+    style=filled;
+    color=lightgrey;
+
+    // Nodes for loading documents
+    DirectoryLoader [label="Directory Loader\nReads text files from directory" tooltip="Loads all text files from the specified directory."]
+    TextSplitter [label="Text Splitter\nSplits documents into chunks" tooltip="Splits large documents into smaller chunks for better embedding and retrieval."]
+    GPT4AllEmbed [label="GPT4All Embeddings\nConverts chunks to embeddings" tooltip="Embeds text chunks using GPT4All model."]
+
+    // Edges showing the flow of document loading and processing
+    DirectoryLoader -> TextSplitter [label="1. Load documents"]
+    TextSplitter -> GPT4AllEmbed [label="2. Split & Embed"]
+  }
+
+  // Define nodes for vector storage
+  VectorStore [label="Chroma Vector Store\n(Vector storage and retrieval)" tooltip="Stores document embeddings and enables efficient retrieval."]
+
+  // Define the subgraph for generating responses
+  subgraph cluster_generation {
+    label="Response Generation";
+    style=filled;
+    color=lightblue;
+
+    // Nodes for generating responses
+    Retriever [label="Document Retriever\nRetrieves relevant docs" tooltip="Retrieves the most relevant document snippets to a given prompt."]
+    LocalLLM [label="Local LLM Client\nGenerates response" tooltip="Local Large Language Model client that generates the response based on the retrieved text."]
+    RagChain [label="RAG Chain\nOrchestrates retrieval and response generation" tooltip="The sequence of components from retrieval to response generation."]
+
+    // Edges showing the flow of response generation
+    Retriever -> LocalLLM [label="3. Retrieve"]
+    LocalLLM -> RagChain [label="4. Generate"]
+  }
+
+  // Edges between loader subgraph and vector storage, and vector storage to generation subgraph
+  GPT4AllEmbed -> VectorStore [label="5. Store embeddings" lhead=cluster_loader]
+  VectorStore -> Retriever [label="6. Retrieve & Format for generation" ltail=cluster_loader lhead=cluster_generation]
+  
+  // An additional edge to represent the final output
+  RagChain -> Output [label="7. Stream output to user" tooltip="Final output streamed to the user."]
+
+  // Define an invisible edge to enforce rank ordering (i.e., top to bottom layout)
+  DirectoryLoader -> Retriever [style=invis]
+}
