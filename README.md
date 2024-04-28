@@ -1,5 +1,14 @@
 
-# Retrieval-Augmented Generation (RAG) Setup with Local, Private, Offline LLM
+# Retrieval-Augmented Generation (RAG) Setup with Local, Privately Hosted LLM 
+
+## RAG Intention 
+
+**To operate as a local Financial Macro Analyst on your PDF Research Corpus**
+
+- **Drop PDFs**
+
+- **Run RAG & Ask Questions**
+
 
 ## About
 This repo came about at the back of my recent all-things GenerativeAI hands-on explorations followed by the cross-training into Machine Learning for a deeper understanding on this subject matter.
@@ -8,37 +17,60 @@ This repo will eventually grow a collection of my hands-on accelerators.
 
 Tag along and follow this journey on [Linkedin](https://www.linkedin.com/in/johas/) and [Medium Blog](https://jaroslav-pantsjoha.medium.com/)  
 
-## Description
-This project implements a Retrieval-Augmented Generation (RAG) system that leverages the power of local Large Language Models (LLMs) to enhance the process of generating responses based on the retrieval of relevant documents. The system reads multiple text files from a specified directory, processes these files to retrieve contextually relevant information, and uses this information to generate enhanced responses to user queries. Inspired by Ruddy Thor [Rag Demo](https://github.com/ruddythor/mick.ai)
-
-![RAG Demo Screenshot](RAG-demo-screenshot.png)
-
-### Assumptions, Levels of Competence as my Playing Field
+### Assumptions on Levels of Knowledge Required, Implied
 - The Key emphasis for this experiment is to get this running quickly, and operating locally soon as - **Most Value for Least Effort**
 - My Experience: My Background is in Application Modernisation, GitOps & Kubernetes - as a Container Platform and Google Cloud evangelist. I'm not necessarily a developer day-in day out. And that's fine. So I will rely on GenAI to help me accelerate this [experimentation journey as I have done in the past](https://github.com/jpantsjoha/PromptKeeper-GenAI-Prompts).
 - My Tools: I have started the easy way, and using [LM Studio](https://lmstudio.ai/) that allowed me to hot-swap LLMs and compare for different use cases, and purposes. I have started with this to get my experimenting with LLMs for local use.
 
 
+## RAG Project Description
+This project implements a Retrieval-Augmented Generation (RAG) system that leverages the power of local Large Language Models (LLMs) to enhance the process of generating responses based on the retrieval of relevant documents. The system reads multiple text files from a specified directory, processes these files to retrieve contextually relevant information, and uses this information to generate enhanced responses to user queries. Inspired by Ruddy Thor [Rag Demo](https://github.com/ruddythor/mick.ai)
+
+![RAG Demo Screenshot](RAG-demo-screenshot.png)
+
 ## RAG Features
-- **Multiple File Reading:** Automatically reads all text files within a specified directory, allowing for scalable content processing.
-- **Advanced Text Processing:** Uses the `RecursiveCharacterTextSplitter` to split documents into manageable chunks for better embedding and retrieval.
-- **Local LLM Support:** Configured to interact with a local LLM endpoint, reducing latency and reliance on external APIs.
-- **Dynamic Content Retrieval:** Integrates Chroma vector storage for efficient storage and retrieval of document embeddings.
-- **Interactive Query System:** Provides a live interface for users to enter queries and receive responses based on the retrieved documents.
+- **Multiple File Reading:** Efficiently processes multiple text files for dynamic content retrieval.
+- **Advanced Text Processing:** Utilizes `RecursiveCharacterTextSplitter` for optimal text manipulation and embedding.
+- **Local LLM Support:** Fully compatible with local LLM endpoints to minimize dependency on external APIs.
+- **Interactive Query System:** Live user interface for real-time querying and response generation.
+
 
 ## RAG Architecture
 The system architecture is outlined in the diagram below. It showcases the flow from document loading and processing to response generation, facilitated by the interplay between various components.
 
 ![RAG Architecture](rag_architecture.png)
 
+## New Feature: Prompt Context Window
+The Prompt Context Window is a crucial enhancement in our RAG setup. It allows users to predefine a specific context that is automatically prepended to each query. This context acts as a primer, setting the stage for the LLM to generate more focused and relevant responses based on predefined background information. 
+
+### Current Context Window Implementation
+```
+# Define a more specific context for financial analysis
+context_prefix = """
+Context for Financial Analysts: This system is designed to support financial analysts specializing in macroeconomics. 
+Analysts are tasked with evaluating current interest rates and predicting future economic conditions to formulate 
+robust investment strategies. They rely heavily on quantitative models to extrapolate trends from historical data and 
+interpret complex economic reports. Key considerations include GDP growth rates, inflation forecasts, and global 
+economic indicators that influence market dynamics. This analysis helps in making data-driven decisions to optimize 
+portfolio performance under varying economic scenarios.
+"""
+```
+
+### Benefits:
+- **Increased Relevance**: Ensures that the LLM's responses are more aligned with the user's expectations and the specific domain of inquiry, such as financial analysis or economic forecasting.
+- **Enhanced Accuracy**: By providing a consistent contextual backdrop, the model can better understand and interpret the user's queries, leading to more accurate and insightful responses.
+- **Customization**: Users can tailor the context to fit various themes or projects, making this tool adaptable across different professional fields and research areas.
+
+
 ## RAG Architecture Details
 The architecture consists of several key components:
-- **Directory Loader:** Loads all text files from a given directory.
-- **Text Splitter:** Splits large documents into smaller chunks for processing.
-- **GPT4All Embeddings:** Converts text chunks into embeddings using GPT4All.
-- **Chroma Vector Store:** Stores and retrieves embeddings efficiently.
-- **OpenAI LLM Client:** Interfaces with a local LLM endpoint to generate responses based on retrieved text.
+- **Directory Loader:** Manages the ingestion of text files from designated directories.
+- **Text Splitter:** Breaks down large documents into manageable chunks.
+- **GPT4All Embeddings:** Converts text into meaningful embeddings.
+- **Chroma Vector Store:** Handles the storage and retrieval of embeddings.
+- **OpenAI LLM Client:** Facilitates communication with the LLM for generating responses.
 - **RAG Chain:** Orchestrates the flow from retrieval to response generation.
+
 
 ### How do you Get Started - Quick and Easy
 1. Clone the repository to your local machine.
