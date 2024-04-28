@@ -52,6 +52,44 @@ The system architecture is outlined in the diagram below. It showcases the flow 
 - bs4
 - pathlib
 
+# Installation Guide
+
+Before running the RAG setup, you need to install several dependencies, which include Python packages and system libraries. Follow the steps below to install them on your system.
+
+## Prerequisites
+Ensure you have Python 3.8+ and pip installed on your system. You can check your Python version with:
+
+```sh
+python --version
+```
+
+If you're using a Mac, you'll also need Homebrew to install some of the system dependencies:
+
+```sh
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+## System Dependencies
+Certain components require system-level dependencies like poppler for PDF processing and graphviz for generating visual representations of the architecture.
+
+### macOS
+```sh
+brew install poppler pkg-config python graphviz
+```
+
+### Python Packages
+The following Python packages are required. You can install them using pip:
+
+```sh
+pip install open-interpreter bs4 langchain-community langchain-chroma langchain langchainhub gpt4all pdftotext langchain_openai unstructured pygraphviz
+```
+
+To handle any potential issues with the pygraphviz installation related to library paths, you can also install it using the following commands:
+
+```sh
+pip install pygraphviz --install-option="--include-path=/usr/local/include/graphviz" --install-option="--library-path=/usr/local/lib/graphviz/"
+```
+
 ### License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
